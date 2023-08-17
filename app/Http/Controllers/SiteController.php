@@ -29,7 +29,13 @@ class SiteController extends Controller
      */
     public function store(StoreSiteRequest $request)
     {
-        //
+    //    dd($request->all());
+        $site = auth()->user()->sites()->create([
+            'name' => $request->name,
+            'url' => $request->url
+        ]);
+
+        return redirect()->route('site.show', $site);
     }
 
     /**
@@ -37,7 +43,7 @@ class SiteController extends Controller
      */
     public function show(Site $site)
     {
-        //
+        return view('site.show', compact('site'));
     }
 
     /**
